@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OmniToolbox · أدوات أومني</title>
+<meta name="description" content="All-in-one toolbox for Windows and Android: archives, media conversion and player, PDF and image tools, cleaner, file tools, technician and system tools, drives, network and hardware tests. 90-day free trial.">
+<meta name="theme-color" content="#0d2340">
+<link rel="canonical" href="https://yalozair.github.io/OmniToolbox-Releases/">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OmniToolbox">
+<meta property="og:title" content="OmniToolbox · All-in-one toolbox for Windows & Android">
+<meta property="og:description" content="Archives, media, PDF, cleaner, file tools and 40+ technician and system tools in one app. One key for your PC and phone. 90-day free trial.">
+<meta property="og:url" content="https://yalozair.github.io/OmniToolbox-Releases/">
+<meta property="og:image" content="https://yalozair.github.io/OmniToolbox-Releases/images/01_cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="960">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OmniToolbox · All-in-one toolbox for Windows & Android">
+<meta name="twitter:description" content="Archives, media, PDF, cleaner, file tools and technician tools in one app. 90-day free trial.">
+<meta name="twitter:image" content="https://yalozair.github.io/OmniToolbox-Releases/images/01_cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d2340;
+    --navy-2: #163b6b;
+    --blue: #2f6fd6;
+    --amber: #f5b82e;
+    --amber-2: #ffd56b;
+    --ink: #13213a;
+    --muted: #5b6b85;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --line: #e3e8f1;
+    --icon-bg: linear-gradient(135deg, #e8f0ff, #fff3d6);
+    --show-bg: linear-gradient(180deg, #fff, var(--bg));
+    --radius: 18px;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e6ecf7;
+      --muted: #9aa8c0;
+      --bg: #0b1424;
+      --card: #12203a;
+      --line: #22334f;
+      --blue: #6ea0ff;
+      --icon-bg: linear-gradient(135deg, #1b3157, #3a2f12);
+      --show-bg: linear-gradient(180deg, #0f1b30, var(--bg));
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.65;
+  }
+  html[lang="ar"] body { font-family: "Cairo", "Segoe UI", Tahoma, sans-serif; }
+  html[lang="ar"] .en, html[lang="en"] .ar { display: none !important; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: .9em; background: rgba(127,140,170,.15); padding: 1px 6px; border-radius: 6px; direction: ltr; unicode-bidi: embed; }
+
+  /* Top bar */
+  .top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 35, 64, .88);
+    backdrop-filter: blur(10px);
+    color: #fff;
+  }
+  .top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  .nav { display: flex; gap: 22px; margin-inline-start: auto; font-size: 15px; opacity: .9; }
+  .nav a:hover { color: var(--amber-2); }
+  .lang {
+    border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff;
+    border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer;
+  }
+  .lang:hover { background: rgba(255,255,255,.12); }
+
+  /* Hero */
+  .hero {
+    color: #fff;
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(245,184,46,.28), transparent 60%),
+      radial-gradient(700px 400px at 0% 110%, rgba(47,111,214,.45), transparent 60%),
+      linear-gradient(160deg, var(--navy), var(--navy-2));
+    padding: 84px 0 96px;
+    overflow: hidden;
+  }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,184,46,.16); color: var(--amber-2);
+    border: 1px solid rgba(245,184,46,.4);
+    padding: 6px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  }
+  .hero h1 { font-size: clamp(34px, 5vw, 54px); line-height: 1.15; margin: 18px 0 14px; font-weight: 800; }
+  .hero h1 span { color: var(--amber); }
+  .hero p.lead { font-size: 19px; opacity: .88; margin: 0 0 30px; max-width: 580px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 14px; font-weight: 700; font-size: 16px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--amber); color: #1b1300; box-shadow: 0 10px 30px rgba(245,184,46,.35); }
+  .btn.ghost { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+  .btn small { display: block; font-weight: 500; font-size: 12px; opacity: .75; }
+  .hero-art { position: relative; display: flex; justify-content: center; }
+  .hero-art .glow {
+    position: absolute; inset: 10% 15%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,184,46,.45), transparent 65%); filter: blur(30px);
+  }
+  .hero-art img.logo {
+    position: relative; width: min(300px, 70%); border-radius: 56px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 50% { transform: translateY(-12px); } }
+  .stats { display: flex; gap: 34px; margin-top: 38px; flex-wrap: wrap; }
+  .stats b { display: block; font-size: 28px; color: var(--amber-2); line-height: 1.1; }
+  .stats span { font-size: 14px; opacity: .8; }
+
+  /* Sections */
+  section { padding: 84px 0; }
+  .head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+  .head .kicker { color: var(--blue); font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  html[lang="ar"] .head .kicker { letter-spacing: 0; }
+  .head h2 { font-size: clamp(28px, 3.6vw, 38px); margin: 8px 0 12px; line-height: 1.25; }
+  .head p { color: var(--muted); margin: 0; font-size: 17px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(19,33,58,.08); border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
+  .icon {
+    width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center;
+    font-size: 25px; margin-bottom: 16px;
+    background: var(--icon-bg);
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .tag { font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+  .tag.free { background: rgba(26,158,107,.14); color: #1a9e6b; }
+  .tag.pro { background: rgba(245,184,46,.18); color: #b07a00; }
+  .tag.win { background: rgba(47,111,214,.14); color: var(--blue); }
+  @media (prefers-color-scheme: dark) { .tag.pro { color: var(--amber-2); } }
+
+  /* Showcase */
+  .showcase { background: var(--show-bg); }
+  .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; margin: 0; }
+  .shot img { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 12px 34px rgba(19,33,58,.12); }
+  .shot figcaption { margin-top: 14px; font-weight: 700; }
+  .shot figcaption span { display: block; font-weight: 400; color: var(--muted); font-size: 14px; }
+
+  /* Downloads */
+  .dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dl .card { display: flex; flex-direction: column; }
+  .dl .card p { flex: 1; margin-bottom: 18px; }
+  .dl .btn { justify-content: center; }
+  .dl .btn.dark { background: var(--navy); color: #fff; }
+  .dl .btn.outline { border: 1px solid var(--line); color: var(--ink); padding: 10px 16px; font-size: 14px; }
+  .dl .apks { display: grid; gap: 8px; }
+  .meta { font-size: 13px; color: var(--muted); margin-top: 8px; text-align: center; direction: ltr; }
+  .relinfo { text-align: center; color: var(--muted); font-size: 14px; margin-top: 22px; }
+  .relinfo a { color: var(--blue); }
+
+  /* Platforms / before you start */
+  .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .platform {
+    border-radius: 22px; padding: 30px; color: #fff;
+    background: linear-gradient(150deg, var(--navy), var(--navy-2));
+  }
+  .platform.android { background: linear-gradient(150deg, #0f3b2e, #1a6b4f); }
+  .platform h3 { margin: 0 0 14px; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+  .platform ul { margin: 0; padding-inline-start: 20px; opacity: .92; }
+  .platform li { margin: 8px 0; }
+  .platform code { background: rgba(255,255,255,.14); }
+
+  /* Pricing */
+  .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  .plan {
+    background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px;
+    display: flex; flex-direction: column;
+  }
+  .plan.best { border: 2px solid var(--amber); box-shadow: 0 24px 50px rgba(245,184,46,.18); position: relative; }
+  .plan .badge {
+    position: absolute; top: -13px; inset-inline-start: 24px;
+    background: var(--amber); color: #1b1300; font-weight: 700; font-size: 13px;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .plan h3 { margin: 0; font-size: 20px; }
+  .price { font-size: 40px; font-weight: 800; margin: 12px 0 2px; }
+  .price small { font-size: 16px; font-weight: 600; color: var(--muted); }
+  .plan .note { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .plan ul { list-style: none; padding: 0; margin: 0 0 24px; flex: 1; }
+  .plan li { padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
+  .plan li::before { content: "✓"; color: #1a9e6b; font-weight: 800; margin-inline-end: 10px; }
+  .plan li.no::before { content: "–"; color: #b0b9c9; }
+  .plan .btn { justify-content: center; }
+  .plan .btn.outline { border: 1px solid var(--line); color: var(--ink); }
+  .plan .btn.dark { background: var(--navy); color: #fff; }
+  .fine { text-align: center; color: var(--muted); font-size: 14px; margin-top: 22px; }
+  .fine a { color: var(--blue); }
+
+  /* FAQ */
+  .faq { max-width: 820px; margin: 0 auto; }
+  details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 22px; margin-bottom: 12px;
+  }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--blue); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin: 12px 0 0; }
+  details a { color: var(--blue); text-decoration: underline; }
+
+  /* Footer */
+  footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 44px 0; font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 18px; }
+  footer a:hover { color: var(--amber-2); }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .platforms, .pricing, .dl { grid-template-columns: 1fr; }
+    .hero-art { order: -1; }
+    .hero-art img.logo { width: 180px; border-radius: 38px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .nav { display: none; }
+    .lang { margin-inline-start: auto; }
+  }
+  @media (max-width: 600px) {
+    .grid, .shots { grid-template-columns: 1fr; }
+    section { padding: 60px 0; }
+  }
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .hero-art img.logo { animation: none; }
+    .top, .cta, .plan .btn, .dl .btn { display: none !important; }
+    .hero { padding: 40px 0; }
+    section { padding: 36px 0; break-inside: avoid; }
+    .card, .shot, .plan { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <img src="images/icon.png" alt="">
+      <span>OmniToolbox</span>
+    </a>
+    <nav class="nav">
+      <a href="#features"><span class="ar">الأدوات</span><span class="en">Tools</span></a>
+      <a href="#download"><span class="ar">التحميل</span><span class="en">Download</span></a>
+      <a href="#pricing"><span class="ar">الأسعار</span><span class="en">Pricing</span></a>
+      <a href="#faq"><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></a>
+    </nav>
+    <button class="lang" id="lang" type="button"><span class="ar">English</span><span class="en">العربية</span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill">🧰 <span class="ar">ويندوز وأندرويد · مفتاح واحد</span><span class="en">Windows &amp; Android · one key</span></span>
+      <h1 class="ar">كل أدواتك في <span>تطبيق واحد</span></h1>
+      <h1 class="en">Every tool you need, <span>in one app</span></h1>
+      <p class="lead ar">ضغط وفك الأرشيفات، تحويل وضغط الوسائط مع مشغّل مدمج، أدوات PDF والصور، تنظيف الجهاز، أدوات الملفات، وعشرات أدوات الفني لإصلاح ويندوز وتشخيصه — على الكمبيوتر والجوال.</p>
+      <p class="lead en">Compress and extract archives, convert and shrink media with a built-in player, PDF and image tools, a cleaner, file tools, and dozens of technician tools to diagnose and fix Windows — on your PC and your phone.</p>
+      <div class="cta">
+        <a class="btn primary" href="#download">
+          ⬇ <span><span class="ar">تحميل مجاني</span><span class="en">Free download</span><small class="ar">تجربة كاملة 90 يوماً</small><small class="en">Full 90-day trial</small></span>
+        </a>
+        <a class="btn ghost" href="#pricing"><span class="ar">الأسعار</span><span class="en">See pricing</span></a>
+      </div>
+      <div class="stats">
+        <div><b>60+</b><span class="ar">أداة في مكان واحد</span><span class="en">tools in one place</span></div>
+        <div><b>90</b><span class="ar">يوم تجربة بكل الأدوات</span><span class="en">day trial, every tool</span></div>
+        <div><b>2</b><span class="ar">منصّتان بمفتاح واحد</span><span class="en">platforms, one key</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="glow"></div>
+      <img class="logo" src="images/icon.png" alt="OmniToolbox" width="256" height="256">
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">الأدوات</span><span class="en">Tools</span></div>
+      <h2 class="ar">صندوق أدوات كامل للكمبيوتر والجوال</h2>
+      <h2 class="en">A complete toolbox for your PC and phone</h2>
+      <p class="ar">واجهة عربية وإنجليزية كاملة، وضع فاتح وداكن، بحث فوري في الأدوات، وكل شيء يعمل على جهازك.</p>
+      <p class="en">A full Arabic and English interface, light and dark themes, instant tool search, and everything runs on your device.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="icon">🗜️</div>
+        <h3><span class="ar">الأرشيفات</span><span class="en">Archives</span> <span class="tag free"><span class="ar">مجاني</span><span class="en">Free</span></span></h3>
+        <p class="ar">ضغط وفك ZIP و 7Z و RAR و ISO وغيرها بمحرك 7-Zip، مع كلمات المرور.</p>
+        <p class="en">Compress and extract ZIP, 7Z, RAR, ISO and more with the 7-Zip engine, including passwords.</p></div>
+      <div class="card"><div class="icon">🎬</div>
+        <h3><span class="ar">الوسائط والمشغّل</span><span class="en">Media &amp; player</span> <span class="tag free"><span class="ar">مجاني</span><span class="en">Free</span></span></h3>
+        <p class="ar">تحويل وضغط الفيديو والصوت، قص ودمج وGIF، ومشغّل وسائط مدمج بالترجمات والمعادِل.</p>
+        <p class="en">Convert and compress video and audio, trim, merge and make GIFs, plus a built-in player with subtitles and equalizer.</p></div>
+      <div class="card"><div class="icon">📄</div>
+        <h3><span class="ar">PDF والصور</span><span class="en">PDF &amp; images</span> <span class="tag free"><span class="ar">مجاني</span><span class="en">Free</span></span></h3>
+        <p class="ar">دمج وتقسيم وتدوير صفحات PDF واستخراج الصور، وتغيير حجم الصور وتحويلها دفعة واحدة.</p>
+        <p class="en">Merge, split and rotate PDF pages and extract images; resize and convert photos in batches.</p></div>
+      <div class="card"><div class="icon">🧹</div>
+        <h3><span class="ar">المنظّف</span><span class="en">Cleaner</span></h3>
+        <p class="ar">حذف الملفات المؤقتة والمخلّفات وتحرير الذاكرة، وعلى ويندوز بقايا البرامج والسجل.</p>
+        <p class="en">Remove junk and temp files and free RAM; on Windows also program leftovers and registry entries.</p></div>
+      <div class="card"><div class="icon">📁</div>
+        <h3><span class="ar">أدوات الملفات</span><span class="en">File tools</span> <span class="tag free"><span class="ar">مجاني</span><span class="en">Free</span></span></h3>
+        <p class="ar">مدير ملفات، محلل المساحة، الملفات المكررة، إعادة تسمية جماعية، مقارنة المجلدات، تقسيم ودمج، Hash، نسخ احتياطي، تشفير، مولّد كلمات مرور، حذف آمن، واستعادة المحذوفات وفك قفل الملفات على ويندوز.</p>
+        <p class="en">File manager, storage analyzer, duplicates, bulk rename, folder compare, split/join, hashes, backup, encryption, password generator, secure delete, plus file recovery and unlocker on Windows.</p></div>
+      <div class="card"><div class="icon">📸</div>
+        <h3><span class="ar">تصوير الشاشة</span><span class="en">Screen capture</span> <span class="tag win">Windows</span></h3>
+        <p class="ar">لقطات شاشة وتسجيل فيديو للشاشة مباشرة من التطبيق.</p>
+        <p class="en">Take screenshots and record your screen right from the app.</p></div>
+      <div class="card"><div class="icon">🩺</div>
+        <h3><span class="ar">أدوات الفني</span><span class="en">Technician tools</span> <span class="tag win">Windows</span></h3>
+        <p class="ar">فحص سريع بنقرة، تقرير صحة HTML باسم الفني وشعاره، عارض الأحداث، تحليل الشاشة الزرقاء (minidump)، سجل الموثوقية، وحزمة دعم ZIP جاهزة للإرسال.</p>
+        <p class="en">One-click quick check, HTML health report with your technician branding, event viewer, blue-screen minidump analysis, reliability history and a ready-to-send support bundle ZIP.</p></div>
+      <div class="card"><div class="icon">🛠️</div>
+        <h3><span class="ar">إصلاحات سريعة وصيانة</span><span class="en">Quick fixes &amp; maintenance</span> <span class="tag win">Windows</span></h3>
+        <p class="ar">إصلاح قائمة ابدأ والبحث والمتجر والصوت وذاكرة الأيقونات والوقت والبروكسي والملف الشخصي المؤقت، و SFC/DISM، وأدوات Windows Update ونقاط الاستعادة.</p>
+        <p class="en">Fix Start, search, Store, audio, icon cache, time sync, proxy and temp profiles; run SFC/DISM; Windows Update tools and restore points.</p></div>
+      <div class="card"><div class="icon">⚙️</div>
+        <h3><span class="ar">النظام</span><span class="en">System</span> <span class="tag win">Windows</span></h3>
+        <p class="ar">نسخ التعريفات، الخدمات، المهام المجدولة، برامج بدء التشغيل، العمليات، الحرارة، متغيرات البيئة، ميزات ويندوز، الطابعات، إزالة التطبيقات المثبتة مسبقاً، إعدادات الخصوصية، وحالة التفعيل.</p>
+        <p class="en">Drivers backup, services, scheduled tasks, startup, processes, temperatures, environment variables, Windows features, printers, debloat, privacy tweaks and activation status.</p></div>
+      <div class="card"><div class="icon">💽</div>
+        <h3><span class="ar">الأقراص</span><span class="en">Drives</span> <span class="tag win">Windows</span></h3>
+        <p class="ar">الأقراص والأقسام، اختبار سرعة القرص والذاكرة، إنشاء فلاشة إقلاع، وتركيب ونسخ ملفات ISO والأقراص.</p>
+        <p class="en">Disks and partitions, disk and RAM speed tests, bootable USB creation, and ISO/disc mounting and burning.</p></div>
+      <div class="card"><div class="icon">🌐</div>
+        <h3><span class="ar">الشبكة</span><span class="en">Network</span></h3>
+        <p class="ar">اختبار السرعة، Wi-Fi، Ping و Traceroute والمنافذ، Wake-on-LAN، ملف hosts، المجلدات المشتركة، الجدار الناري، ونقل الملفات بين الجوال والكمبيوتر عبر الشبكة.</p>
+        <p class="en">Speed test, Wi-Fi, ping, traceroute and ports, Wake-on-LAN, hosts file, shares, firewall, and LAN file transfer between phone and PC.</p></div>
+      <div class="card"><div class="icon">📦</div>
+        <h3><span class="ar">البرامج والعتاد</span><span class="en">Apps &amp; hardware</span></h3>
+        <p class="ar">إلغاء التثبيت مع البقايا، winget، صانع المثبّت الصامت، واختبارات الشاشة والسماعات والمايكروفون والكاميرا والبطارية.</p>
+        <p class="en">Uninstaller with leftovers, winget, silent installer builder, and tests for screen, speakers, mic, camera and battery.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">نظرة سريعة</span><span class="en">At a glance</span></div>
+      <h2 class="ar">للمستخدم العادي وللفني معاً</h2>
+      <h2 class="en">For everyday users and technicians alike</h2>
+    </div>
+    <div class="shots">
+      <figure class="shot"><img src="images/01_cover.jpg" alt="OmniToolbox" width="1280" height="960" loading="lazy">
+        <figcaption><span class="ar">صندوق أدوات واحد</span><span class="en">One toolbox</span>
+          <span class="ar">بدلاً من عشرات البرامج المتفرقة على ويندوز وأندرويد.</span>
+          <span class="en">Instead of dozens of separate apps on Windows and Android.</span></figcaption></figure>
+      <figure class="shot"><img src="images/02_technician_system_tools.jpg" alt="" width="1280" height="960" loading="lazy">
+        <figcaption><span class="ar">أدوات الفني والنظام</span><span class="en">Technician &amp; system tools</span>
+          <span class="ar">شخّص المشكلة، أصلحها، وسلّم العميل تقريراً باسمك.</span>
+          <span class="en">Diagnose, fix, and hand the customer a report with your name on it.</span></figcaption></figure>
+      <figure class="shot"><img src="images/03_files_media_tools.jpg" alt="" width="1280" height="960" loading="lazy">
+        <figcaption><span class="ar">الملفات والوسائط</span><span class="en">Files &amp; media</span>
+          <span class="ar">أرشيفات، فيديو، صوت، صور و PDF — وتبقى مجانية بعد التجربة.</span>
+          <span class="en">Archives, video, audio, images and PDF — still free after the trial.</span></figcaption></figure>
+      <figure class="shot"><img src="images/04_one_key_windows_android.jpg" alt="" width="1280" height="960" loading="lazy">
+        <figcaption><span class="ar">مفتاح واحد</span><span class="en">One key</span>
+          <span class="ar">اشتراك واحد يفعّل التطبيق على الكمبيوتر والجوال.</span>
+          <span class="en">One subscription activates the app on your PC and your phone.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">التحميل</span><span class="en">Download</span></div>
+      <h2 class="ar">حمّل أحدث إصدار</h2>
+      <h2 class="en">Get the latest version</h2>
+      <p class="ar">مجاني للتحميل، وكل الأدوات مفتوحة 90 يوماً بدون بطاقة. التطبيق يحدّث نفسه تلقائياً.</p>
+      <p class="en">Free to download, with every tool unlocked for 90 days and no card. The app updates itself.</p>
+    </div>
+    <div class="dl">
+      <div class="card"><div class="icon">🖥️</div>
+        <h3><span class="ar">ويندوز — المثبّت</span><span class="en">Windows — installer</span></h3>
+        <p class="ar">الخيار الموصى به لويندوز 10 و 11 (64-بت)، مع اختصارات وتحديث تلقائي.</p>
+        <p class="en">Recommended for Windows 10 and 11 (64-bit), with shortcuts and automatic updates.</p>
+        <a class="btn primary" data-asset="setup" href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest">⬇ <span class="ar">تحميل المثبّت</span><span class="en">Download installer</span></a>
+        <div class="meta" data-meta="setup"></div></div>
+      <div class="card"><div class="icon">🗂️</div>
+        <h3><span class="ar">ويندوز — نسخة محمولة</span><span class="en">Windows — portable</span></h3>
+        <p class="ar">ملف ZIP بلا تثبيت: فك الضغط في أي مجلد أو فلاشة وشغّل <code>OmniToolbox.exe</code>.</p>
+        <p class="en">A ZIP with no setup: extract it to any folder or USB stick and run <code>OmniToolbox.exe</code>.</p>
+        <a class="btn dark" data-asset="portable" href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest">⬇ <span class="ar">تحميل ZIP</span><span class="en">Download ZIP</span></a>
+        <div class="meta" data-meta="portable"></div></div>
+      <div class="card"><div class="icon">📱</div>
+        <h3>Android</h3>
+        <p class="ar">اختر <b>arm64-v8a</b> لمعظم الجوالات الحديثة، و armeabi-v7a للأجهزة القديمة، و x86_64 للمحاكيات.</p>
+        <p class="en">Pick <b>arm64-v8a</b> for most modern phones, armeabi-v7a for older devices, and x86_64 for emulators.</p>
+        <div class="apks">
+          <a class="btn primary" data-asset="arm64" href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest">⬇ arm64-v8a <span class="ar">(موصى به)</span><span class="en">(recommended)</span></a>
+          <div class="meta" data-meta="arm64"></div>
+          <a class="btn outline" data-asset="armv7" href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest">armeabi-v7a</a>
+          <a class="btn outline" data-asset="x64apk" href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest">x86_64</a>
+        </div></div>
+    </div>
+    <p class="relinfo"><span id="relver"></span>
+      <a href="https://github.com/yalozair/OmniToolbox-Releases/releases/latest"><span class="ar">كل الملفات وملاحظات الإصدار</span><span class="en">All files and release notes</span></a></p>
+  </div>
+</section>
+
+<section id="start" class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">قبل أن تبدأ</span><span class="en">Before you start</span></div>
+      <h2 class="ar">التثبيت في دقيقة</h2>
+      <h2 class="en">Installing takes a minute</h2>
+    </div>
+    <div class="platforms">
+      <div class="platform">
+        <h3>🖥️ Windows 10 / 11 (x64)</h3>
+        <ul class="ar">
+          <li>إن ظهر تحذير SmartScreen «حمى Windows جهاز الكمبيوتر»: اضغط <b>مزيد من المعلومات</b> ثم <b>تشغيل على أي حال</b>.</li>
+          <li>بعض الأدوات (الصيانة، الأقراص، الخدمات، الإصلاحات) تحتاج تشغيل البرنامج كمسؤول، وسيطلب ذلك عند الحاجة.</li>
+          <li>النسخة المحمولة: فك ضغط ملف ZIP بالكامل أولاً ثم شغّل <code>OmniToolbox.exe</code> من المجلد — لا تشغّله من داخل الملف المضغوط. تُحفظ الإعدادات في مجلد <code>data</code> بجانبه، فيمكن تشغيلها من فلاشة.</li>
+        </ul>
+        <ul class="en">
+          <li>If SmartScreen says “Windows protected your PC”, click <b>More info</b>, then <b>Run anyway</b>.</li>
+          <li>Some tools (maintenance, disks, services, fixes) need administrator rights; the app asks when needed.</li>
+          <li>Portable: extract the whole ZIP first, then run <code>OmniToolbox.exe</code> from the folder — not from inside the archive. Settings stay in a <code>data</code> folder beside it, so it runs from a USB stick.</li>
+        </ul>
+      </div>
+      <div class="platform android">
+        <h3>📱 Android</h3>
+        <ul class="ar">
+          <li>عند فتح ملف APK اسمح لمتصفحك أو مدير الملفات بـ<b>تثبيت التطبيقات من مصادر غير معروفة</b>.</li>
+          <li>لا تعرف أي نسخة تختار؟ <b>arm64-v8a</b> تعمل على معظم الجوالات الحديثة.</li>
+          <li>النسخة المجانية على أندرويد تعرض إعلانات Google (شريط، وإعلان كامل نادر بعد المهام الطويلة)، وتختفي عند التفعيل.</li>
+        </ul>
+        <ul class="en">
+          <li>When opening the APK, allow your browser or file manager to <b>install unknown apps</b>.</li>
+          <li>Not sure which file? <b>arm64-v8a</b> works on most modern phones.</li>
+          <li>Free copies on Android show Google ads (a banner, and a rare full-screen ad after long tasks); activation removes them.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">الأسعار</span><span class="en">Pricing</span></div>
+      <h2 class="ar">جرّب كل شيء مجاناً 90 يوماً</h2>
+      <h2 class="en">Try everything free for 90 days</h2>
+      <p class="ar">بدون بطاقة. بعد التجربة تبقى أدوات كثيرة مجانية للأبد، وتفتح بقية الأدوات باشتراك سنوي واحد.</p>
+      <p class="en">No card needed. After the trial many tools stay free forever; one yearly subscription unlocks the rest.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan">
+        <h3 class="ar">التجربة</h3><h3 class="en">Trial</h3>
+        <div class="price">90 <small><span class="ar">يوماً</span><span class="en">days</span></small></div>
+        <div class="note ar">تبدأ من أول تشغيل</div><div class="note en">starts on first launch</div>
+        <ul class="ar">
+          <li>كل الأدوات بلا استثناء</li>
+          <li>ويندوز وأندرويد</li>
+          <li>بدون بطاقة أو تسجيل</li>
+        </ul>
+        <ul class="en">
+          <li>Every single tool</li>
+          <li>Windows and Android</li>
+          <li>No card, no sign-up</li>
+        </ul>
+        <a class="btn outline" href="#download"><span class="ar">ابدأ التجربة</span><span class="en">Start the trial</span></a>
+      </div>
+      <div class="plan">
+        <h3 class="ar">مجاني</h3><h3 class="en">Free</h3>
+        <div class="price">0 <small>SAR</small></div>
+        <div class="note ar">للأبد، بعد التجربة</div><div class="note en">forever, after the trial</div>
+        <ul class="ar">
+          <li>الأرشيفات والوسائط والمشغّل</li>
+          <li>PDF والصور وتصوير الشاشة</li>
+          <li>أدوات الملفات والتنظيف الأساسي</li>
+          <li>اختبار السرعة ونقل الملفات</li>
+          <li class="no">أدوات النظام والأقراص والشبكة والفني</li>
+        </ul>
+        <ul class="en">
+          <li>Archives, media and player</li>
+          <li>PDF, images and screen capture</li>
+          <li>File tools and basic cleaning</li>
+          <li>Speed test and file transfer</li>
+          <li class="no">System, drives, network and technician tools</li>
+        </ul>
+        <a class="btn outline" href="#download"><span class="ar">تحميل</span><span class="en">Download</span></a>
+      </div>
+      <div class="plan best">
+        <span class="badge ar">كل الأدوات</span><span class="badge en">Everything</span>
+        <h3 class="ar">اشتراك سنوي</h3><h3 class="en">Yearly</h3>
+        <div class="price">50 <small>SAR / <span class="ar">سنة</span><span class="en">year</span></small></div>
+        <div class="note ar">يتجدد سنوياً، وتلغيه متى شئت</div><div class="note en">renews yearly, cancel anytime</div>
+        <ul class="ar">
+          <li>كل أدوات النظام والأقراص والشبكة والفني</li>
+          <li>مفتاح واحد لويندوز وأندرويد</li>
+          <li>على الكمبيوتر والجوال</li>
+          <li>بدون إعلانات على أندرويد</li>
+          <li>التحديثات طوال الاشتراك</li>
+        </ul>
+        <ul class="en">
+          <li>All system, drives, network and technician tools</li>
+          <li>One key for Windows and Android</li>
+          <li>On your PC and your phone</li>
+          <li>No ads on Android</li>
+          <li>Updates while subscribed</li>
+        </ul>
+        <a class="btn primary" href="https://alozair.lemonsqueezy.com/checkout/buy/06b033da-95fc-4255-8279-5dd25c41f37e"><span class="ar">اشترك الآن</span><span class="en">Subscribe now</span></a>
+      </div>
+    </div>
+    <p class="fine ar">الدفع آمن عبر Lemon Squeezy، ويصلك مفتاح التفعيل بالبريد فوراً. قد تُضاف ضريبة القيمة المضافة عند الدفع حسب بلدك. استرداد كامل خلال 14 يوماً — <a href="refund.html">سياسة الاسترداد</a>.</p>
+    <p class="fine en">Secure checkout by Lemon Squeezy; your license key arrives by email right away. VAT may be added at checkout depending on your country. Full refund within 14 days — <a href="refund.html">refund policy</a>.</p>
+  </div>
+</section>
+
+<section id="faq" class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></div>
+      <h2 class="ar">أسئلة شائعة</h2>
+      <h2 class="en">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary><span class="ar">كيف تعمل التجربة المجانية؟</span><span class="en">How does the free trial work?</span></summary>
+        <p class="ar">من أول تشغيل تحصل على 90 يوماً بكل الأدوات، بدون بطاقة أو حساب. لن يُخصم منك شيء تلقائياً.</p>
+        <p class="en">From the first launch you get 90 days with every tool, no card or account. Nothing is ever charged automatically.</p>
+      </details>
+      <details>
+        <summary><span class="ar">ماذا يبقى مجانياً بعد التجربة؟</span><span class="en">What stays free after the trial?</span></summary>
+        <p class="ar">الأرشيفات، أدوات الملفات، PDF، الصور، الفيديو والصوت، المشغّل، تصوير الشاشة، اختبار السرعة ونقل الملفات، والتنظيف الأساسي — مجانية للأبد. أدوات النظام والأقراص والشبكة والفني تحتاج الاشتراك السنوي.</p>
+        <p class="en">Archives, file tools, PDF, images, video and audio, the player, screen capture, speed test, file transfer and basic cleaning stay free forever. System, drives, network and technician tools need the yearly subscription.</p>
+      </details>
+      <details>
+        <summary><span class="ar">كيف أفعّل بعد الشراء؟</span><span class="en">How do I activate after buying?</span></summary>
+        <p class="ar">يصلك المفتاح بالبريد فور الدفع. افتح التطبيق ← الإعدادات ← الترخيص، والصق المفتاح. نفس المفتاح يعمل على ويندوز وأندرويد.</p>
+        <p class="en">The key is emailed right after payment. Open the app → Settings → License and paste it. The same key works on Windows and Android.</p>
+      </details>
+      <details>
+        <summary><span class="ar">كيف أنقل المفتاح إلى جهاز جديد؟</span><span class="en">How do I move my key to a new device?</span></summary>
+        <p class="ar">في الجهاز القديم افتح الإعدادات ← الترخيص واضغط «إلغاء التفعيل» لتحرير المكان، ثم فعّل المفتاح على الجهاز الجديد. إن فقدت الجهاز القديم راسلنا.</p>
+        <p class="en">On the old device open Settings → License and choose Deactivate to free the slot, then activate the key on the new one. Lost the old device? Email us.</p>
+      </details>
+      <details>
+        <summary><span class="ar">كيف ألغي الاشتراك أو أجد مفتاحي؟</span><span class="en">How do I cancel or find my key?</span></summary>
+        <p class="ar">من <a href="https://alozair.lemonsqueezy.com/billing">صفحة إدارة الاشتراك</a> تستطيع إلغاء التجديد، تحديث بطاقتك، تحميل الفواتير، ورؤية مفتاحك. بعد الإلغاء يبقى الاشتراك فعالاً حتى نهاية المدة المدفوعة.</p>
+        <p class="en">On the <a href="https://alozair.lemonsqueezy.com/billing">billing portal</a> you can cancel renewal, update your card, download invoices and see your key. After cancelling, the subscription stays active until the end of the paid period.</p>
+      </details>
+      <details>
+        <summary><span class="ar">هل توجد إعلانات؟</span><span class="en">Are there ads?</span></summary>
+        <p class="ar">على ويندوز لا. على أندرويد تعرض النسخة غير المفعّلة إعلانات Google: شريط صغير، وإعلان كامل نادر بعد المهام الطويلة. تختفي كلها عند التفعيل.</p>
+        <p class="en">Not on Windows. On Android, copies that aren't activated show Google ads: a small banner and a rare full-screen ad after long tasks. Activation removes them all.</p>
+      </details>
+      <details>
+        <summary><span class="ar">ماذا عن خصوصيتي؟</span><span class="en">What about my privacy?</span></summary>
+        <p class="ar">كل الأدوات تعمل على جهازك، وملفاتك لا تُرفع إلى أي خادم. الاتصال بالإنترنت فقط للتحقق من الترخيص والتحديثات (وإعلانات أندرويد المجانية). التفاصيل في <a href="privacy.html">سياسة الخصوصية</a>.</p>
+        <p class="en">Every tool runs on your device and your files are never uploaded. The app only goes online for license checks and updates (and ads on free Android copies). Details in the <a href="privacy.html">privacy policy</a>.</p>
+      </details>
+      <details>
+        <summary><span class="ar">كيف أتواصل معكم؟</span><span class="en">How do I contact you?</span></summary>
+        <p class="ar">راسلنا على <a href="mailto:yalozair2013@gmail.com">yalozair2013@gmail.com</a> لأي سؤال أو مشكلة أو اقتراح.</p>
+        <p class="en">Email <a href="mailto:yalozair2013@gmail.com">yalozair2013@gmail.com</a> for any question, issue or suggestion.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Yousif Alozair · OmniToolbox</div>
+    <div class="links">
+      <a href="privacy.html"><span class="ar">الخصوصية</span><span class="en">Privacy</span></a>
+      <a href="terms.html"><span class="ar">الشروط</span><span class="en">Terms</span></a>
+      <a href="refund.html"><span class="ar">الاسترداد</span><span class="en">Refunds</span></a>
+      <a href="https://github.com/yalozair/OmniToolbox-Releases/releases"><span class="ar">الإصدارات</span><span class="en">Releases</span></a>
+      <a href="mailto:yalozair2013@gmail.com">yalozair2013@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const html = document.documentElement;
+  function setLang(lang) {
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = lang === 'ar' ? 'OmniToolbox · أدوات أومني' : 'OmniToolbox · All-in-one toolbox for Windows & Android';
+    showRelease();
+  }
+  let release = null;
+  function showRelease() {
+    if (!release) return;
+    const date = new Date(release.published_at).toLocaleDateString(html.lang === 'ar' ? 'ar' : 'en', { year: 'numeric', month: 'short', day: 'numeric' });
+    document.getElementById('relver').textContent = (html.lang === 'ar' ? 'الإصدار ' : 'Version ') + release.tag_name.replace(/^v/, '') + ' · ' + date + ' · ';
+  }
+  const patterns = {
+    setup: /^OmniToolbox-Setup-.*\.exe$/i,
+    portable: /-portable-x64\.zip$/i,
+    arm64: /-arm64-v8a\.apk$/i,
+    armv7: /-armeabi-v7a\.apk$/i,
+    x64apk: /-x86_64\.apk$/i,
+  };
+  fetch('https://api.github.com/repos/yalozair/OmniToolbox-Releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(rel => {
+      release = rel;
+      const version = rel.tag_name.replace(/^v/, '');
+      for (const [key, re] of Object.entries(patterns)) {
+        const asset = (rel.assets || []).find(a => re.test(a.name));
+        if (!asset) continue;
+        document.querySelectorAll('[data-asset="' + key + '"]').forEach(a => { a.href = asset.browser_download_url; });
+        const meta = document.querySelector('[data-meta="' + key + '"]');
+        if (meta) meta.textContent = 'v' + version + ' · ' + (asset.size / 1048576).toFixed(1) + ' MB';
+      }
+      showRelease();
+    })
+    .catch(() => {});
+  const asked = new URLSearchParams(location.search).get('lang');
+  setLang(asked === 'en' || asked === 'ar' ? asked : (navigator.language || '').startsWith('ar') ? 'ar' : 'en');
+  document.getElementById('lang').addEventListener('click', () => setLang(html.lang === 'ar' ? 'en' : 'ar'));
+</script>
+</body>
+</html>
